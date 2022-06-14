@@ -14,6 +14,56 @@ The project is about the Orange Juice dataset. We use two methods to select the 
 ### Overview
 *TODO*: Explain about the data you are using and where you got it from.
 
+We use the Orange Juice dataset taken from the R package [Bayesian Inference for Marketing/Micro-Econometrics](https://cran.r-project.org/web/packages/bayesm/index.html) (bayesm). It represents weekly sales of refrigerated orange juice at 83 stores. Also, it contains demographic information on those stores. To be able to use this dataset, we execute an R script to convert the orangeJuice.rda located in "./starter_file/ojdata" into two directories "train" and "test". We focuse on the "train" directory, which contains two csv files :
+
+  - "xy.csv" : Weekly sales of refrigerated orange juice at 83 stores. It has 106139 rows and 19 columns.
+  
+              $store : store number
+              
+              $brand : brand indicator
+              
+              $week : week number
+              
+              $logmove : log of the number of units sold
+              
+              $constant : a vector of 1s
+              
+              $price# : price of each brand. It is 11 columns.
+              
+              $deal : in-store coupon activity
+              
+              $feature : feature advertisement
+              
+              $profit : profit obtained
+              
+  - "storedemo.csv" : Demographic information on the 83 stores. It has 83 rows and 13 columns. 
+  
+              $STORE : store number
+              
+              $AGE60 : percentage of the population that is aged 60 or older
+              
+              $EDUC : percentage of the population that has a college degree
+              
+              $ETHNIC : percent of the population that has different ethnicity
+              
+              $INCOME : median income
+              
+              $HHLARGE : percentage of households with 5 or more persons
+              
+              $WORKWOM : percentage of women with full-time jobs
+              
+              $HVAL150 : percentage of households worth more than $150,000
+              
+              $SSTRDIST : distance to the nearest warehouse store
+              
+              $SSTRVOL : ratio of sales of this store to the nearest warehouse store
+              
+              $CPDIST5 : average distance in miles to the nearest 5 supermarkets
+              
+              $CPWVOL5 : ratio of sales of this store to the average of the nearest five stores
+
+In this dataset, we start from week 40
+
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
 
@@ -48,3 +98,7 @@ The project is about the Orange Juice dataset. We use two methods to select the 
 
 ## Standout Suggestions
 *TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+
+We wanted to convert our AutoML model to ONNX format. However, due to an incompatibility reason for a forecasting task, we were unable to set "True" the parameter "enable_onnx_compatible_models". Here is a proof of the error. 
+<img src="./starter_file/screenshots/config_onnx.PNG">
+<img src="./starter_file/screenshots/onnx_error.PNG">
