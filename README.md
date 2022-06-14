@@ -48,3 +48,7 @@ The project is about the Orange Juice dataset. We use two methods to select the 
 
 ## Standout Suggestions
 *TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
+
+We wanted to convert our AutoML model to ONNX format. However, due to an incompatibility reason for a forecasting task, we were unable to set "True" the parameter "enable_onnx_compatible_models". Here is a proof of the error. 
+<img src="./screenshots/config_onnx.PNG">
+<img src="./screenshots/onnx_error.PNG">
