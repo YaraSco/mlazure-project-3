@@ -2,7 +2,7 @@
 
 *TODO:* Write a short introduction to your project.
 
-As it is our final project in Udacity program, we chose to apply what we learned to a forecasting model. For this purpose we took our inspiration from this (git repository)[https://github.com/microsoft/forecasting/blob/86b421b71826b92e47c3e3cb6cdcbf7ff4a63b90/examples/grocery_sales/README.md].
+As it is our final project in Udacity program, we chose to apply what we learned to a forecasting model. For this purpose we took our inspiration from this [git repository](https://github.com/microsoft/forecasting/blob/86b421b71826b92e47c3e3cb6cdcbf7ff4a63b90/examples/grocery_sales/README.md)
 
 The project is about the Orange Juice dataset. We use two methods to select the best forecasting model. The first method consists of tuning the scikit learn model LightGBM. The second method is to configure AutoML with a task of forecasting. We refer to the primary metric Mean Absolute Percentage Error (MAPE). The model that obtains the lowest of MAPE is deployed using Python SDK.
 
