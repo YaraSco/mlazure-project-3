@@ -14,6 +14,8 @@ The project is about the Orange Juice dataset. We use two methods to select the 
 ### Overview
 *TODO*: Explain about the data you are using and where you got it from.
 
+We use the Orange Juice dataset taken from the R package [Bayesian Inference for Marketing/Micro-Econometrics](https://cran.r-project.org/web/packages/bayesm/index.html)(bayesm).
+
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
 
