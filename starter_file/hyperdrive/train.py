@@ -21,7 +21,7 @@ import lightgbm as lgb
 
 from azureml.core import Run
 from sklearn.model_selection import train_test_split
-from fclib.feature_engineering.feature_utils import week_of_month, df_from_cartesian_product, combine_features
+from feature_utils import week_of_month, df_from_cartesian_product, combine_features
 
 
 FIRST_WEEK = 40
