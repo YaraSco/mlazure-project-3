@@ -7,19 +7,20 @@ to week 135 as well as price, deal, and advertisement information from week 40 t
 hyperparameters of the model and trains a model on 95% of the data by using these hyperparameters. Then, it 
 evaluates the accuracy of the trained model on a validation set which is the remaining 5% of the data. The 
 validation MAPE will be logged and collected by HyperDrive for searching the best set of hyperparameters. In 
-addition, the trained model will be saved in the "./outputs_hyperdrive/" folder which is automatically uploaded into run 
+addition, the trained model will be saved in the "./outputs" folder which is automatically uploaded into run 
 history of each trial.
 """
 
 import os
 import math
+import joblib
 import argparse
 import datetime
 import numpy as np
 import pandas as pd
 import lightgbm as lgb
 
-from azureml.core import Run
+from azureml.core import Run, Dataset
 from sklearn.model_selection import train_test_split
 from feature_utils import week_of_month, df_from_cartesian_product, combine_features
 
@@ -32,14 +33,12 @@ FIRST_WEEK_START = pd.to_datetime("1989-09-14 00:00:00")
 
 def create_features(pred_round, train_dir, lags, window_size, used_columns):
     """Create input features for model training and testing.
-
     Args: 
         pred_round (int): Prediction round (1, 2, ...)
         train_dir (str): Path of the training data directory 
         lags (np.array): Numpy array including all the lags
         window_size (int): Maximum step for computing the moving average
         used_columns (list[str]): A list of names of columns used in model training (including target variable)
-
     Returns:
         pd.Dataframe: Dataframe including all the input features and target variable
         int: Last week of the training data 
@@ -119,8 +118,9 @@ def create_features(pred_round, train_dir, lags, window_size, used_columns):
 if __name__ == "__main__":
     # Parse input arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data-folder", type=str, dest="data_folder", default=".", help="data folder mounting point")
-    parser.add_argument("--num-leaves", type=int, dest="num_leaves", default=64, help="# of leaves of the tree")
+    parser.add_argument("--train", type=str, dest="train_data", default=".", help="Id of train data")
+    parser.add_argument("--auxi", type=str, dest="auxi_data", default=".", help="Id of auxi data")
+    parser.add_argument("--num-leaves", type=int, dest="num_leaves", default=64, help="Number of leaves of the tree")
     parser.add_argument(
         "--min-data-in-leaf", type=int, dest="min_data_in_leaf", default=50, help="minimum # of samples in each leaf"
     )
@@ -151,10 +151,7 @@ if __name__ == "__main__":
 
     # Start an Azure ML run
     run = Run.get_context()
-
-    # Data paths
-    DATA_DIR = args.data_folder
-    TRAIN_DIR = os.path.join(DATA_DIR, "train")
+    ws = run.experiment.workspace
 
     # Data and forecast problem parameters
     TRAIN_START_WEEK = 40
@@ -185,12 +182,9 @@ if __name__ == "__main__":
 
     # Train and validate the model using only the first round data
     r = 0
-    # Load training data
-    default_train_file = os.path.join(TRAIN_DIR, "train.csv")
-    if os.path.isfile(default_train_file):
-        train_df = pd.read_csv(default_train_file)
-    else:
-        train_df = pd.read_csv(os.path.join(TRAIN_DIR, "train_" + str(r + 1) + ".csv"))
+    #Get train dataset by ID
+    dataset_train = Dataset.get_by_id(ws, id=args.train_data)
+    train_df = dataset_train.to_pandas_dataframe()
     train_df["move"] = train_df["logmove"].apply(lambda x: round(math.exp(x)))
     train_df = train_df[["store", "brand", "week", "move"]]
 
@@ -203,11 +197,8 @@ if __name__ == "__main__":
     data_filled = pd.merge(data_grid, train_df, how="left", on=["store", "brand", "week"])
 
     # Get future price, deal, and advertisement info
-    default_aux_file = os.path.join(TRAIN_DIR, "auxi.csv")
-    if os.path.isfile(default_aux_file):
-        aux_df = pd.read_csv(default_aux_file)
-    else:
-        aux_df = pd.read_csv(os.path.join(TRAIN_DIR, "auxi_" + str(r + 1) + ".csv"))
+    dataset_auxi = Dataset.get_by_id(ws, id=args.auxi_data)
+    aux_df = dataset_auxi.to_pandas_dataframe()
     data_filled = pd.merge(data_filled, aux_df, how="left", on=["store", "brand", "week"])
 
     # Create relative price feature
@@ -269,10 +260,10 @@ if __name__ == "__main__":
     # Get final training loss & validation loss
     train_loss = evals_result["training"]["mape"][-1]
     valid_loss = evals_result["valid_1"]["mape"][-1]
-
+    
+    # Save model in "outputs" folder
+    os.makedirs('outputs', exist_ok=True)
+    joblib.dump(value=model, filename='outputs/model.joblib')
+    
     # Log the validation loss (MAPE)
-    run.log("MAPE", np.float(valid_loss) * 100)
-
-    # Files saved in the "./outputs_hyperdrive" folder are automatically uploaded into run history
-    os.makedirs("./outputs_hyperdrive/models", exist_ok=True)
-    model.save_model("./outputs_hyperdrive/models/model_lgb.txt")
+    run.log("MAPE", np.float(valid_loss) * 100)    
