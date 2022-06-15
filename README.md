@@ -72,6 +72,8 @@ In this dataset, we start from week 40 to week 138. The "train.csv" file contain
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
 
+We have the dataset as csv files in our directory "ojdata". in Azure Studio, we register the files of "train" directory under their respective names "train" and "auxi". This registered datasets is used for the hypertuning. For the test file, we use it after we deploy our model. 
+
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
 
