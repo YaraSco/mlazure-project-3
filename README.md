@@ -14,7 +14,7 @@ The project is about the Orange Juice dataset. We use two methods to select the 
 ### Overview
 *TODO*: Explain about the data you are using and where you got it from.
 
-We use the Orange Juice dataset taken from the R package [Bayesian Inference for Marketing/Micro-Econometrics](https://cran.r-project.org/web/packages/bayesm/index.html) (bayesm). It represents weekly sales of refrigerated orange juice at 83 stores. Also, it contains demographic information on those stores. To be able to use this dataset, we execute an R script to convert the orangeJuice.rda located in "./starter_file/ojdata" into two directories "train" and "test". We focuse on the "train" directory, which contains two csv files :
+We use the Orange Juice dataset taken from the R package [Bayesian Inference for Marketing/Micro-Econometrics](https://cran.r-project.org/web/packages/bayesm/index.html) (bayesm). It represents weekly sales of refrigerated orange juice at 83 stores. Also, it contains demographic information on those stores. To be able to use this dataset, we execute an R script to convert the orangeJuice.rda located in "./starter_file/ojdata" into two files :
 
   - "xy.csv" : Weekly sales of refrigerated orange juice at 83 stores. It has 106139 rows and 19 columns.
   
@@ -62,10 +62,12 @@ We use the Orange Juice dataset taken from the R package [Bayesian Inference for
               
               $CPWVOL5 : ratio of sales of this store to the average of the nearest five stores
 
-In this dataset, we start from week 40
+We use the two files to generate two directories "train" and "test". The "train" directory includes "train.csv" and "auxi.csv" with "train.csv" containing the historical sales up to week 135 (the time we make forecasts) and "auxi.csv" containing price/promotion information up until week 138. We assume that future price and promotion information up to a certain number of weeks ahead is predetermined and known. On the other hand, the directory "test" has the sales of each product in week 137 and 138. 
 
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+
+In this dataset, we start from week 40 to week 138. The "train.csv" file contains historical sales up to week 135. Our task is to forecast the sales of the 157 and 158 week. The week 136 is represented as a gap to leave time for planning inventory as in real life.
 
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
