@@ -1,9 +1,9 @@
 import os
 import json
+import joblib
 import numpy as np
 import pandas as pd
 
-import joblib
 from azureml.core.model import Model
 
 
@@ -18,10 +18,10 @@ def init():
         print('init method error: ' + str(err))
 
 
-def run(raw_data, columns):
+def run(raw_data):
     
-    data = np.array(json.loads(raw_data)["data"])
-    test_df = pd.DataFrame(data=data, columns=columns)
+    df_data = json.loads(raw_data)
+    #test_df = pd.DataFrame(data=data, columns=columns)
     
-    out = bst.predict(test_df)
-    return out.tolist()
+    forecasts, X_future = model.forecast(df_data)
+    return forecasts, X_future
