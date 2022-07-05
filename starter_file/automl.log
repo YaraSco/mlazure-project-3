@@ -1,0 +1,13 @@
+2022-07-05 14:05:59.680 - INFO - 7793 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetOutput
+2022-07-05 14:05:59.700 - INFO - 7793 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetOutput
+2022-07-05 14:05:59.718 - INFO - 7793 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetChildren
+2022-07-05 14:05:59.858 - INFO - 7793 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=139.61[ms]
+2022-07-05 14:05:59.909 - INFO - 7793 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=209.06[ms]
+2022-07-05 14:05:59.909 - INFO - 7793 - azureml.train.automl._model_download_utilities._log_activity:55 - ActivityStarted: DownloadModel
+2022-07-05 14:06:02.681 - INFO - 7793 - azureml.training.tabular.featurization.text.pretrained_text_dnn_transformer.horovod_initialized:65 - Horovod not found in current environment. Distribution via Horovod will be disabled.
+2022-07-05 14:06:07.234 - INFO - 7793 - azureml.train.automl._model_download_utilities._log_activity:89 - ActivityCompleted: Activity=DownloadModel, HowEnded=Success, Duration=7324.28[ms]
+2022-07-05 14:06:07.235 - INFO - 7793 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetOutput, HowEnded=Success, Duration=7555.62[ms]
+2022-07-05 14:23:16.045 - INFO - 7793 - azureml.train.automl.run._log_activity:55 - ActivityStarted: RegisterModel
+2022-07-05 14:23:16.069 - INFO - 7793 - azureml.train.automl.run._log_activity:55 - ActivityStarted: GetChildren
+2022-07-05 14:23:16.224 - INFO - 7793 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=GetChildren, HowEnded=Success, Duration=155.17[ms]
+2022-07-05 14:23:17.250 - INFO - 7793 - azureml.train.automl.run._log_activity:89 - ActivityCompleted: Activity=RegisterModel, HowEnded=Success, Duration=1205.23[ms]
