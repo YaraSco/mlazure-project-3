@@ -93,19 +93,19 @@ For the forecast settings dictionary, we define:
  
 For the AutoML settings dictionary, we define:
 
-  -"experiment_timeout_hours" : 1.2 hours. The experiment is costly in term of time.
-  -"primary_metric": Normalized Mean Absolute Error should be minimizeed.
-  -"n_cross_validation": 3 folds. It divides our training set into 3 folds. It helps our model to not overfit.
+  - "experiment_timeout_hours" : 1.2 hours. The experiment is costly in term of time.
+  - "primary_metric": Normalized Mean Absolute Error should be minimizeed.
+  - "n_cross_validation": 3 folds. It divides our training set into 3 folds. It helps our model to not overfit.
   
 We define the AutoML configuration as follow:
 
-  -"task": "forecasting". Our model should forecast the attribute "move".
-  -"debug_log": "automl_errors.log". If a problems occurs. this file helps us debug.
-  -"training_data": train_dataset contains the "train_automl.csv" file.
-  -"label_column_name": the variable target represent the attribute "move".
-  -"compute_target": compute_target. We use our compute cluster defined in the notebook. Also, our code checks for existing compute clusters before creating a new one.
-  -"enable_early_stopping: True. To terminate the run if there is no improvement in the score.
-  -"verbosity": logging.INFO. It writes on the log file "automl.log".
+  - "task": "forecasting". Our model should forecast the attribute "move".
+  - "debug_log": "automl_errors.log". If a problems occurs. this file helps us debug.
+  - "training_data": train_dataset contains the "train_automl.csv" file.
+  - "label_column_name": the variable target represent the attribute "move".
+  - "compute_target": compute_target. We use our compute cluster defined in the notebook. Also, our code checks for existing compute clusters before creating a new one.
+  - "enable_early_stopping: True. To terminate the run if there is no improvement in the score.
+  - "verbosity": logging.INFO. It writes on the log file "automl.log".
 
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
