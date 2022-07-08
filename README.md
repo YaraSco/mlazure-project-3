@@ -78,11 +78,14 @@ In this project, we use two methods to access the data in our workspace. For the
 
 <img src="./starter_file/screenshots/registered_data_hyperdrive.PNG">
 
-
-We have the dataset as csv files in our directory "ojdata". in Azure Studio, we register the files of "train" directory under their respective names "train" and "auxi". This registered datasets is used for the hypertuning. For the test file, we use it after we deploy our model. 
-
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+
+We use the [AutoMLConfig class](https://docs.microsoft.com/en-us/python/api/azureml-train-automl-client/azureml.train.automl.automlconfig.automlconfig?view=azure-ml-py) to configure our Automated ML experiment, as shown bellow.
+
+<img src="./starter_file/screenshots/automl_settings.PNG">
+
+
 
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
