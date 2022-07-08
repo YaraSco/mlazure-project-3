@@ -110,6 +110,13 @@ We define the AutoML configuration as follow:
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
 
+We submit the Automated ML experiment and wait until it is completed. The figure bellow describes the status of each model.
+<img src="./starter_file/screenshots/automl_widgets_1.PNG">
+
+Also, we have an overview of the different values of MAPE obtained by each model.
+<img src="./starter_file/screenshots/automl_widgets_2.PNG">
+
+
 *TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
 
 ## Hyperparameter Tuning
