@@ -4,7 +4,7 @@
 
 As it is our final project in Udacity program, we chose to apply what we learned to a forecasting model. For this purpose we took our inspiration from this [git repository](https://github.com/microsoft/forecasting/blob/86b421b71826b92e47c3e3cb6cdcbf7ff4a63b90/examples/grocery_sales/README.md)
 
-The project is about the Orange Juice dataset. We use two methods to select the best forecasting model. The first method consists of tuning the scikit learn model LightGBM. The second method is to configure AutoML with a task of forecasting. We refer to the primary metric Mean Absolute Percentage Error (MAPE). The model that obtains the lowest of MAPE is deployed using Python SDK.
+The project is about the Orange Juice dataset. We use two methods to select the best forecasting model. The first method consists of tuning the scikit learn model LightGBM. The second method is to configure AutoML with a task of forecasting. We refer to the primary metric Mean Absolute Percentage Error (MAPE). The model that obtains the lowest value of MAPE is deployed using Python SDK. After that, we test the deployed model by sending a request to its active endpoint.
 
 ## Project Set Up and Installation
 *OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
@@ -14,7 +14,7 @@ The project is about the Orange Juice dataset. We use two methods to select the 
 ### Overview
 *TODO*: Explain about the data you are using and where you got it from.
 
-We use the Orange Juice dataset taken from the R package [Bayesian Inference for Marketing/Micro-Econometrics](https://cran.r-project.org/web/packages/bayesm/index.html) (bayesm). It represents weekly sales of refrigerated orange juice at 83 stores. Also, it contains demographic information on those stores. To be able to use this dataset, we execute an R script to convert the orangeJuice.rda located in "./starter_file/ojdata" into two files :
+We use the Orange Juice dataset taken from the R package [Bayesian Inference for Marketing/Micro-Econometrics](https://cran.r-project.org/web/packages/bayesm/index.html) (bayesm). It represents weekly sales of refrigerated orange juice at 83 stores. Also, it contains demographic information on those stores. To be able to use this dataset, we run an R script to convert the orangeJuice.rda located in "./starter_file/ojdata" into two files :
 
   - "xy.csv" : Weekly sales of refrigerated orange juice at 83 stores. It has 106139 rows and 19 columns.
   
@@ -67,10 +67,17 @@ We use the two files to generate two directories "train" and "test". The "train"
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
 
-In this dataset, we start from week 40 to week 138. The "train.csv" file contains historical sales up to week 135. Our task is to forecast the sales of the 157 and 158 week. The week 136 is represented as a gap to leave time for planning inventory as in real life.
+In this dataset, we start from the week 40 to the week 138. We are interested in the attribute "logmove" however we need to compute its exponentiel to be abele to use it in our analys. So, we create a new column named "move" which becomes our target. Also, we add a new column "week_start" to become a timestamp for our dataset.
+
+Our task is to forecast the sales of the two weeks 137 and 138. The week 136 is represented as a gap to leave time for planning inventory as in real life. To fulfill this task, we train our model from the week 40 until the week 135 to predict the attribute "move". 
 
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
+
+In this project, we use two methods to access the data in our workspace. For the Automated ML case, we save two csv files "train_automl.csv" and "test_automl.csv" in our local directory. After that we upload these files into the default datastore. For the hyperdrive case, we register the two files "train.csv" and "auxi.csv" of the "train" directory. We did not register the "test" directory, because we did not deploy the hyperdrive's model. Here is a proof of the two registered datasets.
+
+<img src="./starter_file/screenshots/registered_data_hyperdrive.PNG">
+
 
 We have the dataset as csv files in our directory "ojdata". in Azure Studio, we register the files of "train" directory under their respective names "train" and "auxi". This registered datasets is used for the hypertuning. For the test file, we use it after we deploy our model. 
 
