@@ -110,10 +110,10 @@ We define the AutoML configuration as follow:
 ### Results
 *TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
 
-We submit the Automated ML experiment and wait until it is completed. The figure bellow describes the status of each model.
+We submit the Automated ML experiment and wait until it is completed. The figure bellow describes the status of each model in the `RunDetails` widget.
 <img src="./starter_file/screenshots/automl_widgets_1.PNG">
 
-Also, we have an overview of the different values of MAPE obtained by each model.
+Also, we have an overview of different values of MAPE obtained by each model.
 <img src="./starter_file/screenshots/automl_widgets_2.PNG">
 
 
