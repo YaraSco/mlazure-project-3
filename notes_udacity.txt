@@ -1,0 +1,40 @@
+from azureml.core.runconfig import (
+    RunConfiguration,
+    EnvironmentDefinition,
+    CondaDependencies,
+)
+
+# Create environment file
+cd = CondaDependencies.create()
+cd.add_conda_package("numpy=1.16.2")
+cd.add_conda_package("pandas=0.23.4")
+cd.add_conda_package("lightgbm=2.3.0")
+cd.save_to_file(base_directory="./", conda_file_path="myenv.yml")
+
+print(cd.serialize_to_string())
+
+# Create score file
+import os
+import json
+import numpy as np
+import pandas as pd
+import lightgbm as lgb
+
+
+def init():
+    global bst
+    model_root = os.getenv("AZUREML_MODEL_DIR")
+    # The name of the folder in which to look for LightGBM model files
+    lgbm_model_folder = "model"
+    bst = lgb.Booster(
+        model_file=os.path.join(model_root, lgbm_model_folder, "bst-model.txt")
+    )
+
+
+def run(raw_data):
+    columns = bst.feature_name()
+    data = np.array(json.loads(raw_data)["data"])
+    test_df = pd.DataFrame(data=data, columns=columns)
+    # Make prediction
+    out = bst.predict(test_df)
+    return out.tolist()
