@@ -1,0 +1,14 @@
+name: project_environment
+dependencies:
+  - python=3.6.2
+  - pip:
+      - azureml-defaults~=1.42.0
+  - pandas
+  - numpy
+  - scipy
+  - scikit-learn
+  - lightgbm
+  - joblib
+channels:
+  - anaconda
+  - conda-forge
