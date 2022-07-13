@@ -67,14 +67,14 @@ We use the two files to generate two directories "train" and "test". The "train"
 ### Task
 *TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
 
-In this dataset, we start from the week 40 to the week 138. We are interested in the attribute "logmove" however we need to compute its exponentiel to be abele to use it in our analys. So, we create a new column named "move" which becomes our target. Also, we add a new column "week_start" to become a timestamp for our dataset.
+In this dataset, we start from the week 40 to the week 138. We are interested in the attribute "logmove", also we need to compute its exponentiel to be abele to use it in our analysis. So, we create a new column named "move" which becomes our target. Also, we add a new column "week_start" to become a timestamp for our dataset.
 
 Our task is to forecast the sales of the two weeks 137 and 138. The week 136 is represented as a gap to leave time for planning inventory as in real life. To fulfill this task, we train our model from the week 40 until the week 135 to predict the attribute "move". 
 
 ### Access
 *TODO*: Explain how you are accessing the data in your workspace.
 
-In this project, we use two methods to access the data in our workspace. For the Automated ML case, we save two csv files "train_automl.csv" and "test_automl.csv" in our local directory. After that we upload these files into the default datastore. For the hyperdrive case, we register the two files "train.csv" and "auxi.csv" of the "train" directory. We did not register the "test" directory, because we did not deploy the hyperdrive's model. Here is a proof of the two registered datasets.
+In this project, we use two methods to access the data in our workspace. For the Automated ML case, we save two csv files "train_automl.csv" and "test_automl.csv" in our local directory. After that we upload these files into the default datastore. For the hyperdrive case, we register the two files "train.csv" and "auxi.csv" of the "train" directory. Here is a proof of the two registered datasets.
 
 <img src="./starter_file/screenshots/registered_data_hyperdrive.PNG">
 
@@ -116,8 +116,11 @@ We submit the Automated ML experiment and wait until it is completed. The figure
 Also, we have an overview of different values of MAPE obtained by each model.
 <img src="./starter_file/screenshots/automl_widgets_2.PNG">
 
+We use the primary metric Normalized Mean Absolute Error (NMAE) instead of MAPE, because it is not supported as an argument, as we can see in the figure below.
+<img src="./starter_file/screenshots/mape_not_supported_automl.PNG">
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+So, the chosen algorithm is the Voting ensemble with the minimum NMAE value. Also, we can obtain the MAPE of this model, which is 95.582%.
+<img src="./starter_file/screenshots/automl_best_model.PNG">
 
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
