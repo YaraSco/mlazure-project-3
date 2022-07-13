@@ -193,5 +193,5 @@ Our sample input has a length of 1826, containing two weeks 137 and 138. We prep
 - We want to learn more about deploying, so we deployed the AUtoML model "Voting Ensemble". ALso, we send a request to the scoring URI to test our deployed model.
 <img src="./starter_file/screenshots/automl_deploy.PNG">
 
-- We enable the application insights for the deployed AutoML model, as bellow.
+- We enable the application insights for the deployed AutoML model, as shown bellow.
 <img src="./starter_file/screenshots/app_insights_true.PNG">
