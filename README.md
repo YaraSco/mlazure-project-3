@@ -187,5 +187,5 @@ We wanted to convert our AutoML model to ONNX format. However, due to an incompa
 <img src="./starter_file/screenshots/onnx_error.PNG">
 
 Also, for the deployed model LightGBM, we enable logging with the application insights. We give two proofs for it.
-<img src="./starter_file/Happ_insights_false.PNG">
-<img src="./starter_file/Happ_insights_true.PNG">
+<img src="./starter_file/screenshots/Happ_insights_false.PNG">
+<img src="./starter_file/screenshots/Happ_insights_true.PNG">
