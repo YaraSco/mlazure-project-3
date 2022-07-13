@@ -119,7 +119,7 @@ Also, we have an overview of different values of MAPE obtained by each model.
 We use the primary metric Normalized Mean Absolute Error (NMAE) instead of MAPE, because it is not supported as an argument, as we can see in the figure below.
 <img src="./starter_file/screenshots/mape_not_supported_automl.PNG">
 
-So, the chosen algorithm is the Voting ensemble with the minimum NMAE value. Also, we can obtain the MAPE of this model, which is 95.582%.
+So, the chosen algorithm is the Voting ensemble with the minimum NMAE value. Also, we can obtain the MAPE of this model, which is 95.582 %.
 <img src="./starter_file/screenshots/automl_best_model.PNG">
 
 We could improve our result by increasing the time of the "experiment_timeout_hours". Indeed, our training takes a lot of time fo each algorithm. So, many algorithms have been canceled. However, our lab has only 8 hours which is not sufficient in this case.
@@ -158,16 +158,23 @@ After the hyperdrive configuration, we submit the experiment. We provide the fol
 <img src="./starter_file/screenshots/hyperdrive_widgets_1.PNG">
 <img src="./starter_file/screenshots/hyperdrive_widget_2.PNG">
 
-We train our LightGBM model in 25 runs with "max_concurrent_runs = 4". We obtain a value of MAPE equal to 30.704%. In the figure below, we can see the best hyperparameters obtained by the model.
+We train our LightGBM model in 25 runs with "max_concurrent_runs = 4". We obtain a value of MAPE equal to 30.704 %. In the figure below, we can see the best hyperparameters obtained by the model.
 <img src="./starter_file/screenshots/hyperdrive_best_model.PNG">
+
+We could improve it by increasing the number of runs as suggested
 
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
 
-In this project, we have a requirement of deploying the best model. So, we will deploy the LightGBM model that obtained a MAPE equal to 30.704%, instead of the AutoML best algorithm, the "Voting Ensemble" that obtained a value of MAPE equal to 95.582%. 
+In this project, we have a requirement of deploying the best model. So, we will deploy the LightGBM model that obtained a MAPE equal to 30.704 %, instead of the AutoML best algorithm, the "Voting Ensemble" that obtained a value of MAPE equal to 95.582 %. 
 
-We implement "score.py" file and we download the environment file of the best run "conda.yml". 
+We begin with the [InferenceConfig class](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.model.inferenceconfig?view=azure-ml-py). We implement "score.py" file and we download the environment file of the best run "conda.yml".After that, we use AciWebservice (https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aci.aciwebservice?view=azure-ml-py) for the deployment configuration. Finally, we deploy the registered model as a web service named "lightgbm-forecast-oj".
+
+We obtain a healty deployment as shown bellow.
+<img src="./starter_file/screenshots/deployed_hyperdrive_model.PNG">
+
+Our sample input has a length of 1826, containing two weeks 137 and 138. We prepare features according to the input schema of the LightGBM model. We define a method "compute_mape" that computes the MAPE value using the ground truth, which is the attribute "move", and the forecasts obtained by the request's response. We get a MAPE equal to 46.67 %
 
 ## Screen Recording
 *TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
