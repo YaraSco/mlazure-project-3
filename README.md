@@ -180,7 +180,7 @@ We obtain a healty deployment as shown bellow.
 Our sample input has a length of 1826, containing two weeks 137 and 138. We prepare features according to the input schema of the LightGBM model. We define a method "compute_mape" that computes the MAPE value using the ground truth, which is the attribute "move", and the forecasts obtained by the request's response. We get a MAPE equal to 46.67 %. This value is less than 50 %, which is a good test result.
 
 ## Screen Recording
-This is our [screencast](https://www.youtube.com/watch?v=xbjuK39WSyI)
+This is our [screencast](https://www.youtube.com/watch?v=xbjuK39WSyI).
 
 ## Standout Suggestions
 *TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
