@@ -125,6 +125,28 @@ So, the chosen algorithm is the Voting ensemble with the minimum NMAE value. Als
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
+Our datset is abuot forecastinng sales by product, so we choose [LightGBM](https://towardsdatascience.com/multi-step-time-series-forecasting-with-arima-lightgbm-and-prophet-cc9e3f95dfb0#:~:text=LightGBM%20is%20a%20popular%20machine,trend%20and%20seasonality%20(Nile%20dataset)) of Scikit learn for this experiment.
+
+We define our [hyperparameters](https://lightgbm.readthedocs.io/en/latest/Parameters.html) as follow :
+  - "--num-leaves": quniform(8, 128, 1)
+  
+  - "--min-data-in-leaf": quniform(20, 500, 10)
+  
+  - "--learning-rate": choice( 1e-4, 1e-3, 5e-3, 1e-2, 1.5e-2, 2e-2, 3e-2, 5e-2, 1e-1)
+  
+  - "--feature-fraction": uniform(0.2, 1)
+  
+  - "--bagging-fraction": uniform(0.1, 1)
+  
+  - "--bagging-freq": quniform(1, 20, 1)
+  
+  - "--max-rounds": quniform(50, 2000, 10)
+  
+  - "--max-lag": quniform(3, 40, 1)
+  
+  - "--window-size": quniform(3, 40, 1)
+
+We use Bayesian Parameter Sampling over our hyperparameter search space defined previously. Indeed, in the Azure documentation, the bayesian method tries to intelligently pick the next sample of hyperparameters, based on how the previous samples performed, such that the new sample improves the reported primary metric "MAPE". As a result, we do not use an early termination policy.
 
 ### Results
 *TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
