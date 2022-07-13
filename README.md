@@ -116,6 +116,9 @@ We submit the Automated ML experiment and wait until it is completed. The figure
 Also, we have an overview of different values of MAPE obtained by each model.
 <img src="./starter_file/screenshots/automl_widgets_2.PNG">
 
+For the dataset, it is transforemed as shown in this figure :
+<img src="./starter_file/screenshots/data_architecture.PNG">
+
 We use the primary metric Normalized Mean Absolute Error (NMAE) instead of MAPE, because it is not supported as an argument, as we can see in the figure below.
 <img src="./starter_file/screenshots/mape_not_supported_automl.PNG">
 
@@ -182,10 +185,16 @@ Our sample input has a length of 1826, containing two weeks 137 and 138. We prep
 ## Standout Suggestions
 *TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
 
-We wanted to convert our AutoML model to ONNX format. However, due to an incompatibility reason for a forecasting task, we were unable to set "True" the parameter "enable_onnx_compatible_models". Here is a proof of the error. 
+- We wanted to convert our AutoML model to ONNX format. However, due to an incompatibility reason for a forecasting task, we were unable to set "True" the parameter "enable_onnx_compatible_models". Here is a proof of the error. 
 <img src="./starter_file/screenshots/config_onnx.PNG">
 <img src="./starter_file/screenshots/onnx_error.PNG">
 
-Also, for the deployed model LightGBM, we enable logging with the application insights. We give two proofs for it.
+- Also, for the deployed model LightGBM, we enable logging with the application insights. We give two proofs for it.
 <img src="./starter_file/screenshots/Happ_insights_false.PNG">
 <img src="./starter_file/screenshots/Happ_insights_true.PNG">
+
+- We want to learn more about deploying, so we deployed the AUtoML model "Voting Ensemble". ALso, we send a request to the scoring URI to test our deployed model.
+<img src="./starter_file/screenshots/automl_deploy.PNG">
+
+- We enable the application insights for the deployed AutoML model, as bellow.
+<img src="./starter_file/screenshots/app_insights_true.PNG">
