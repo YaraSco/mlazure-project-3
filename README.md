@@ -122,6 +122,8 @@ We use the primary metric Normalized Mean Absolute Error (NMAE) instead of MAPE,
 So, the chosen algorithm is the Voting ensemble with the minimum NMAE value. Also, we can obtain the MAPE of this model, which is 95.582%.
 <img src="./starter_file/screenshots/automl_best_model.PNG">
 
+We could improve our result by increasing the time of the "experiment_timeout_hours". Indeed, our training takes a lot of time fo each algorithm. So, many algorithms have been canceled. However, our lab has only 8 hours which is not sufficient in this case.
+
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
@@ -151,10 +153,21 @@ We use Bayesian Parameter Sampling over our hyperparameter search space defined 
 ### Results
 *TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+After the hyperdrive configuration, we submit the experiment. We provide the following screenshots of the 'RunDetails' widget.
+
+<img src="./starter_file/screenshots/hyperdrive_widgets_1.PNG">
+<img src="./starter_file/screenshots/hyperdrive_widget_2.PNG">
+
+We train our LightGBM model in 25 runs with "max_concurrent_runs = 4". We obtain a value of MAPE equal to 30.704%. In the figure below, we can see the best hyperparameters obtained by the model.
+<img src="./starter_file/screenshots/hyperdrive_best_model.PNG">
+
 
 ## Model Deployment
 *TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+
+In this project, we have a requirement of deploying the best model. So, we will deploy the LightGBM model that obtained a MAPE equal to 30.704%, instead of the AutoML best algorithm, the "Voting Ensemble" that obtained a value of MAPE equal to 95.582%. 
+
+We implement "score.py" file and we download the environment file of the best run "conda.yml". 
 
 ## Screen Recording
 *TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
