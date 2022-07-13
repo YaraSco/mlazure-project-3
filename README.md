@@ -161,7 +161,9 @@ After the hyperdrive configuration, we submit the experiment. We provide the fol
 We train our LightGBM model in 25 runs with "max_concurrent_runs = 4". We obtain a value of MAPE equal to 30.704 %. In the figure below, we can see the best hyperparameters obtained by the model.
 <img src="./starter_file/screenshots/hyperdrive_best_model.PNG">
 
-We could improve it by increasing the number of runs as suggested
+We could improve it by increasing the number of runs as suggested in the warning bellow.
+
+<img src="./starter_file/screenshots/warning_runs.PNG">
 
 
 ## Model Deployment
@@ -172,15 +174,10 @@ In this project, we have a requirement of deploying the best model. So, we will 
 We begin with the [InferenceConfig class](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.model.inferenceconfig?view=azure-ml-py). We implement "score.py" file and we download the environment file of the best run "conda.yml".After that, we use AciWebservice (https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.core.webservice.aci.aciwebservice?view=azure-ml-py) for the deployment configuration. Finally, we deploy the registered model as a web service named "lightgbm-forecast-oj".
 
 We obtain a healty deployment as shown bellow.
+
 <img src="./starter_file/screenshots/deployed_hyperdrive_model.PNG">
 
-Our sample input has a length of 1826, containing two weeks 137 and 138. We prepare features according to the input schema of the LightGBM model. We define a method "compute_mape" that computes the MAPE value using the ground truth, which is the attribute "move", and the forecasts obtained by the request's response. We get a MAPE equal to 46.67 %
-
-## Screen Recording
-*TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
-- A working model
-- Demo of the deployed  model
-- Demo of a sample request sent to the endpoint and its response
+Our sample input has a length of 1826, containing two weeks 137 and 138. We prepare features according to the input schema of the LightGBM model. We define a method "compute_mape" that computes the MAPE value using the ground truth, which is the attribute "move", and the forecasts obtained by the request's response. We get a MAPE equal to 46.67 %. This value is less than 50 %, which is a good test result.
 
 ## Standout Suggestions
 *TODO (Optional):* This is where you can provide information about any standout suggestions that you have attempted.
@@ -188,3 +185,7 @@ Our sample input has a length of 1826, containing two weeks 137 and 138. We prep
 We wanted to convert our AutoML model to ONNX format. However, due to an incompatibility reason for a forecasting task, we were unable to set "True" the parameter "enable_onnx_compatible_models". Here is a proof of the error. 
 <img src="./starter_file/screenshots/config_onnx.PNG">
 <img src="./starter_file/screenshots/onnx_error.PNG">
+
+Also, for the deployed model LightGBM, we enable logging with the application insights. We give two proofs for it.
+<img src="./starter_file/Happ_insights_false.PNG">
+<img src="./starter_file/Happ_insights_true.PNG">
