@@ -113,7 +113,7 @@ We submit the Automated ML experiment and wait until it is completed. The figure
 Also, we have an overview of different values of MAPE obtained by each model.
 <img src="./starter_file/screenshots/automl_widgets_2.PNG">
 
-For the dataset, it is transforemed as shown in this figure :
+For the dataset, it is transformed as shown in this figure :
 <img src="./starter_file/screenshots/data_architecture.PNG">
 
 We use the primary metric Normalized Mean Absolute Error (NMAE) instead of MAPE, because it is not supported as an argument, as we can see in the figure below.
