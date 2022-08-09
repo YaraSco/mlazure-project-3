@@ -127,7 +127,7 @@ We could improve our result by increasing the time of the "experiment_timeout_ho
 ## Hyperparameter Tuning
 *TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
 
-Our datset is abuot forecastinng sales by product, so we choose [LightGBM](https://towardsdatascience.com/multi-step-time-series-forecasting-with-arima-lightgbm-and-prophet-cc9e3f95dfb0#:~:text=LightGBM%20is%20a%20popular%20machine,trend%20and%20seasonality%20(Nile%20dataset)) of Scikit learn for this experiment.
+Our datset is about forecastinng sales by product, so we choose [LightGBM](https://towardsdatascience.com/multi-step-time-series-forecasting-with-arima-lightgbm-and-prophet-cc9e3f95dfb0#:~:text=LightGBM%20is%20a%20popular%20machine,trend%20and%20seasonality%20(Nile%20dataset)) of Scikit learn for this experiment.
 
 We define our [hyperparameters](https://lightgbm.readthedocs.io/en/latest/Parameters.html) as follow :
   - "--num-leaves": quniform(8, 128, 1)
